@@ -2,17 +2,26 @@ package com.whc.base_project.service.impl;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
+import com.alibaba.fastjson.JSONObject;
+import com.whc.base_project.auth.model.ImageCode;
+import com.whc.base_project.auth.model.ValidateCode;
 import com.whc.base_project.service.IUserService;
+import com.whc.base_project.service.ValidateCodeGenerator;
 import com.whc.base_project.utils.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author whc
@@ -26,22 +35,30 @@ public class UserServiceImpl implements IUserService {
     @Resource
     private RedisUtil redisUtil;
 
+    private final ValidateCodeGenerator validateCodeGenerator;
+
+    public UserServiceImpl(@Qualifier("imageCodeGenerator") ValidateCodeGenerator validateCodeGenerator) {
+        this.validateCodeGenerator = validateCodeGenerator;
+    }
+
     @Override
-    public void getLoginCaptcha(String uuid,HttpServletRequest request, HttpServletResponse response){
-        response.setHeader("Pragma", "No-cache");
-        response.setHeader("Cache-Control", "no-cache");
-        response.setDateHeader("Expires", 0);
-        response.setContentType("image/jpeg");
-        //定义图形验证码的长和宽
-        LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(200, 100);
+    public void getLoginCaptcha(String loginName,HttpServletRequest request, HttpServletResponse response){
+        ImageCode validateCode = (ImageCode) validateCodeGenerator.generate(request);
         try {
-            //图形验证码写出到流
-            lineCaptcha.write(response.getOutputStream());
-            redisUtil.getJedis().set(uuid,lineCaptcha.getCode());
+            ImageIO.write(validateCode.getImage(), "JPEG", response.getOutputStream());
+            redisUtil.getJedis().hset("LoginImageCode", loginName,validateCode.getCode());
         } catch (IOException e) {
             log.error("登录验证码生成失败");
         }
     }
+
+    @Override
+    public void send(String mobile, String code) {
+        Map<String,String> map = new HashMap(20);
+        map.put(mobile,"1234");
+        redisUtil.getJedis().set("SMSLoginCode", String.valueOf(map));
+    }
+
 
     /**
      * 获取用户真实IP地址，不使用request.getRemoteAddr();的原因是有可能用户使用了代理软件方式避免真实IP地址。

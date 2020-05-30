@@ -12,7 +12,7 @@ import java.util.Collection;
  * @description
  */
 
-public class SmsCodeAuthenticationToken extends AbstractAuthenticationToken {
+public class LoginAuthenticationToken extends AbstractAuthenticationToken {
     private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
     /**
@@ -24,7 +24,7 @@ public class SmsCodeAuthenticationToken extends AbstractAuthenticationToken {
     /**
      * 构建一个没有鉴权的 SmsCodeAuthenticationToken
      */
-    public SmsCodeAuthenticationToken(Object principal) {
+    public LoginAuthenticationToken(Object principal) {
         super(null);
         this.principal = principal;
         setAuthenticated(false);
@@ -33,14 +33,14 @@ public class SmsCodeAuthenticationToken extends AbstractAuthenticationToken {
     /**
      * 构建拥有鉴权的 SmsCodeAuthenticationToken
      */
-    public SmsCodeAuthenticationToken(Object principal, Collection<? extends GrantedAuthority> authorities) {
+    public LoginAuthenticationToken(Object principal, Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
         this.principal = principal;
         // must use super, as we override
         super.setAuthenticated(true);
     }
 
-    public SmsCodeAuthenticationToken(Collection<? extends GrantedAuthority> authorities) {
+    public LoginAuthenticationToken(Collection<? extends GrantedAuthority> authorities) {
         super(authorities);
     }
 

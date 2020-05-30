@@ -1,4 +1,4 @@
-package com.whc.base_project.config;
+package com.whc.base_project.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -27,9 +28,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Resource
     private UserDetailsService myUserDetailsServiceImpl;
-
-    @Autowired
-    private JWTAuthenticationFilter jwtAuthenticationFilter;
+    @Resource
+    private LoginAuthenticationSecurityConfig loginAuthenticationSecurityConfig;
+    @Resource
+    private LoginAuthorizationFilter loginAuthorizationFilter;
 
     // 加密密码的，安全第一嘛~
     @Bean
@@ -47,14 +49,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
                 // 测试用资源，需要验证了的用户才能访问
-                .antMatchers("/index").authenticated()
+                .antMatchers("/index/**").authenticated()
                 // 其他都放行了
                 .anyRequest().permitAll()
                 .and()
-                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
-                .addFilter(new JWTAuthorizationFilter(authenticationManager()))
+                .apply(loginAuthenticationSecurityConfig)
+                .and()
+                .addFilterBefore(loginAuthorizationFilter,UsernamePasswordAuthenticationFilter.class)
                 // 不需要session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
     }
 
     @Bean

@@ -1,4 +1,4 @@
-package com.whc.base_project.config;
+package com.whc.base_project.auth;
 
 import com.whc.base_project.config.model.JwtUser;
 import com.whc.base_project.mapper.UserMapper;
@@ -7,8 +7,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @Author: WHC
@@ -23,7 +26,24 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = userMapper.selectByUserName(s);
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        String loginType = request.getParameter("loginType");
+        User user = null;
+        if(loginType!=null){
+            switch (loginType){
+                case "1":
+                    user = userMapper.selectByUserName(s);
+                    break;
+                case "2":
+                    user = userMapper.selectByMobile(s);
+                    break;
+                default: user = userMapper.selectByUserName(s);
+            }
+        }else{
+            user = userMapper.selectByUserName(s);
+        }
+
+
         if(user == null){
             throw new UsernameNotFoundException("用户不存在");
         }

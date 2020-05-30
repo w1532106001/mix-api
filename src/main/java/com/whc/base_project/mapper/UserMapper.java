@@ -18,4 +18,6 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     User selectByUserName(@Param("loginName") String loginName);
+
+    User selectByMobile(@Param("mobile") String mobile);
 }

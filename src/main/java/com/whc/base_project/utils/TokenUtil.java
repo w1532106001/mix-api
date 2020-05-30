@@ -12,10 +12,10 @@ import java.util.Date;
  * @description
  */
 
-public class JwtTokenUtil {
+public class TokenUtil {
 
     public static final String TOKEN_HEADER = "Authorization";
-    public static final String TOKEN_PREFIX = "Bearer ";
+    public static final String TOKEN_PREFIX = "Bearer_";
 
     private static final String SECRET = "jwtsecretdemo";
     private static final String ISS = "echisan";
