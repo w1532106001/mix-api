@@ -34,7 +34,7 @@ public class AuthController {
     @PostMapping("/register")
     public int registerUser(String username,String password){
         User user = new User();
-        user.setUserName(username);
+        user.setUsername(username);
         // 记得注册的时候把密码加密一下
         user.setPassword(bCryptPasswordEncoder.encode(password));
         user.setRole("normal");
@@ -43,7 +43,8 @@ public class AuthController {
 
     @PostMapping("/captcha")
     public void getCaptcha(String loginName, HttpServletRequest request, HttpServletResponse response) throws Exception {
-       userService.getLoginCaptcha(loginName, request, response);
+        throw new Exception("123");
+//       userService.getLoginCaptcha(loginName, request, response);
     }
 
     @PostMapping("/smsLoginCode")

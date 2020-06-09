@@ -43,9 +43,9 @@ public class LoginAuthorizationFilter extends OncePerRequestFilter {
         if (tokenHeader != null && tokenHeader.startsWith(TokenUtil.TOKEN_PREFIX)) {
             String result = redisUtil.getJedis().hget("LoginToken", tokenHeader);
             User user = JSONObject.parseObject(result, User.class);
-            if (user.getUserName() != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            if (user.getUsername() != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 //根据用户名获取用户对象
-                UserDetails userDetails = myUserDetailsServiceImpl.loadUserByUsername(user.getUserName());
+                UserDetails userDetails = myUserDetailsServiceImpl.loadUserByUsername(user.getUsername());
                 if (userDetails != null) {
                     UsernamePasswordAuthenticationToken authentication =
                             new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());

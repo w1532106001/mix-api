@@ -26,7 +26,7 @@ public class JwtUser implements UserDetails{
     // 写一个能直接使用user创建jwtUser的构造器
     public JwtUser(User user) {
         id = user.getId();
-        username = user.getUserName();
+        username = user.getUsername();
         password = user.getPassword();
         authorities = Collections.singleton(new SimpleGrantedAuthority(user.getRole()));
     }
