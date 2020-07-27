@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.whc.base_project.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.whc.base_project.model.User">
+<mapper namespace="com.whc.mix_api.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.whc.mix_api.model.User">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
@@ -20,7 +20,7 @@
     delete from user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.whc.base_project.model.User">
+  <insert id="insert" parameterType="com.whc.mix_api.model.User">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -29,7 +29,7 @@
     values (#{loginName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{role,jdbcType=CHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.whc.base_project.model.User">
+  <insert id="insertSelective" parameterType="com.whc.mix_api.model.User">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -57,7 +57,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.whc.base_project.model.User">
+  <update id="updateByPrimaryKeySelective" parameterType="com.whc.mix_api.model.User">
     update user
     <set>
       <if test="loginName != null">
@@ -72,7 +72,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.whc.base_project.model.User">
+  <update id="updateByPrimaryKey" parameterType="com.whc.mix_api.model.User">
     update user
     set username = #{loginName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},

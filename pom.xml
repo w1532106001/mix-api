@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.whc</groupId>
-	<artifactId>base_project</artifactId>
+	<artifactId>mix-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>base_project</name>
+	<name>mix-api</name>
 	<description>javaWeb通用项目</description>
 
 	<properties>

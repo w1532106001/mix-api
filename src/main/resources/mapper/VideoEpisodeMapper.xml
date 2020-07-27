@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whc.mix_api.mapper.VideoEpisodeMapper">
+  <resultMap id="BaseResultMap" type="com.whc.mix_api.model.VideoEpisode">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="video_id" jdbcType="INTEGER" property="videoId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="watch_num" jdbcType="INTEGER" property="watchNum" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="play_url" jdbcType="VARCHAR" property="playUrl" />
+    <result column="thumbnail_url" jdbcType="VARCHAR" property="thumbnailUrl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, video_id, name, watch_num, create_time, update_time, play_url, thumbnail_url
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from video_episode
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from video_episode
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.whc.mix_api.model.VideoEpisode">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into video_episode (video_id, name, watch_num, 
+      create_time, update_time, play_url, 
+      thumbnail_url)
+    values (#{videoId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{watchNum,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{playUrl,jdbcType=VARCHAR}, 
+      #{thumbnailUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.whc.mix_api.model.VideoEpisode">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into video_episode
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="videoId != null">
+        video_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="watchNum != null">
+        watch_num,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="playUrl != null">
+        play_url,
+      </if>
+      <if test="thumbnailUrl != null">
+        thumbnail_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="videoId != null">
+        #{videoId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="watchNum != null">
+        #{watchNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="playUrl != null">
+        #{playUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbnailUrl != null">
+        #{thumbnailUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.whc.mix_api.model.VideoEpisode">
+    update video_episode
+    <set>
+      <if test="videoId != null">
+        video_id = #{videoId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="watchNum != null">
+        watch_num = #{watchNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="playUrl != null">
+        play_url = #{playUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbnailUrl != null">
+        thumbnail_url = #{thumbnailUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.whc.mix_api.model.VideoEpisode">
+    update video_episode
+    set video_id = #{videoId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      watch_num = #{watchNum,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      play_url = #{playUrl,jdbcType=VARCHAR},
+      thumbnail_url = #{thumbnailUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
