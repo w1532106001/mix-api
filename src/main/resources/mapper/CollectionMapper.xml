@@ -4,13 +4,35 @@
   <resultMap id="BaseResultMap" type="com.whc.mix_api.model.Collection">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="video_id" jdbcType="INTEGER" property="videoId" />
-    <result column="sort" jdbcType="INTEGER" property="sort" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+  <resultMap type="com.whc.mix_api.model.bo.CollectionBO" id="collectionVideo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <!--
+        collection定义关联集合类型的属性的封装规则
+        ofType:指定集合里面元素的类型
+    -->
+    <collection property="videoList" ofType="com.whc.mix_api.model.Video">
+      <!-- 定义这个集合中元素的封装规则 -->
+      <id column="a_id" jdbcType="INTEGER" property="id" />
+      <result column="a_name" jdbcType="VARCHAR" property="name" />
+      <result column="a_introduction" jdbcType="VARCHAR" property="introduction" />
+      <result column="a_rating_num" jdbcType="DOUBLE" property="ratingNum" />
+      <result column="a_cover_url" jdbcType="VARCHAR" property="coverUrl" />
+      <result column="a_watch_num" jdbcType="INTEGER" property="watchNum" />
+      <result column="a_favorite_num" jdbcType="INTEGER" property="favoriteNum" />
+      <result column="a_create_time" jdbcType="TIMESTAMP" property="createTime" />
+      <result column="a_update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </collection>
+  </resultMap>
+
+
   <sql id="Base_Column_List">
-    id, name, video_id, sort, create_time, update_time
+    id, name, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -26,9 +48,9 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into collection (name, video_id, sort, 
+    insert into collection (name,
       create_time, update_time)
-    values (#{name,jdbcType=VARCHAR}, #{videoId,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, 
+    values (#{name,jdbcType=VARCHAR},
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.whc.mix_api.model.Collection">
@@ -40,12 +62,6 @@
       <if test="name != null">
         name,
       </if>
-      <if test="videoId != null">
-        video_id,
-      </if>
-      <if test="sort != null">
-        sort,
-      </if>
       <if test="createTime != null">
         create_time,
       </if>
@@ -56,12 +72,6 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="videoId != null">
-        #{videoId,jdbcType=INTEGER},
-      </if>
-      <if test="sort != null">
-        #{sort,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -77,12 +87,6 @@
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="videoId != null">
-        video_id = #{videoId,jdbcType=INTEGER},
-      </if>
-      <if test="sort != null">
-        sort = #{sort,jdbcType=INTEGER},
-      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -95,10 +99,12 @@
   <update id="updateByPrimaryKey" parameterType="com.whc.mix_api.model.Collection">
     update collection
     set name = #{name,jdbcType=VARCHAR},
-      video_id = #{videoId,jdbcType=INTEGER},
-      sort = #{sort,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getLastUpdateTimeTenData" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from collection order by update_time desc limit 10
+  </select>
 </mapper>

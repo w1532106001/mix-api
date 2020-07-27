@@ -40,7 +40,7 @@ public class IndexServiceImpl implements IndexService {
         List<CollectionVO> collectionVOList = new ArrayList<>();
         for (Collection collection : collectionList) {
             CollectionVO collectionVO = ModelConversionUtil.convertCollectionVO(collection);
-            collection.getVideoId()
+            collection.
         }
 
         videoHomePageData.setCollectionList(collectionVOList);
