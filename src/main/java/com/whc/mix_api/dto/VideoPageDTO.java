@@ -14,5 +14,5 @@ public class VideoPageDTO {
     private List<String> tagList;
     private String searchWord;
     private Integer pageSize;
-    private Integer currPage;
+    private Integer pageNum;
 }

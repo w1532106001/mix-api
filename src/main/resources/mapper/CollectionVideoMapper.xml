@@ -104,7 +104,7 @@
   </update>
 
   <select id="selectCollectionVideoVOList" resultMap="com.whc.mix_api.mapper.VideoMapper.VideoVO">
-    select b.id, b.name, b.introduction, b.rating_num, b.watch_num, b.favorite_num , 1 as director,
+    select b.id, b.name, b.introduction, b.rating_num,b.cover_url, b.watch_num, b.favorite_num , 1 as director,
         2 as writer,
         3 as star from collection_video a join video b on a.video_id = b.id where a.collection_id =#{collectionId} order by a.sort,a.update_time desc
   </select>

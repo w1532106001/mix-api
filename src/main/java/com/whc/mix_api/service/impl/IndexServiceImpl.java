@@ -56,9 +56,9 @@ public class IndexServiceImpl implements IndexService {
 
     @Override
     public ApiResult getVideoList(VideoPageDTO videoPageDTO){
-        PageHelper.startPage(videoPageDTO.getCurrPage(), videoPageDTO.getPageSize());
+        PageHelper.startPage(videoPageDTO.getPageNum(), videoPageDTO.getPageSize());
         List<Video> videoList = videoMapper.selectVideoListByVideoPageDTO(videoPageDTO.getTagList(),videoPageDTO.getSearchWord());
-        PageInfo page = new PageInfo(videoList);
+        PageInfo<Video> page = new PageInfo<>(videoList);
         return ApiResultBuilder.success(page);
     }
 
