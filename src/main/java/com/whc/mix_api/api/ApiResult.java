@@ -14,7 +14,7 @@ public class ApiResult<T> {
     /**
      * 处理结果编码
      */
-    @ApiModelProperty(value = "处理结果编码: -1 '操作失败'; 0 '未登录或token已失效'; 1 '操作成功'")
+    @ApiModelProperty(value = "处理结果编码: -1 '操作失败'; 1 '未登录或token已失效'; 0 '操作成功'")
     protected int code;
 
     /**

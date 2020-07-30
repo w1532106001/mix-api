@@ -10,15 +10,12 @@ import com.whc.mix_api.mapper.BannerMapper;
 import com.whc.mix_api.mapper.CollectionMapper;
 import com.whc.mix_api.mapper.TagGroupMapper;
 import com.whc.mix_api.mapper.VideoMapper;
-import com.whc.mix_api.model.Collection;
 import com.whc.mix_api.model.Video;
 import com.whc.mix_api.model.vo.*;
 import com.whc.mix_api.service.IndexService;
-import com.whc.mix_api.utils.ModelConversionUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -67,14 +64,14 @@ public class IndexServiceImpl implements IndexService {
 
     @Override
     public ApiResult getVideoDetailData(int videoId) {
-        VideoDetailsPageVO videoDetailsPageVO = new VideoDetailsPageVO();
+        VideoDetailPageVO videoDetailPageVO = new VideoDetailPageVO();
         VideoVO videoVO = videoMapper.selectVideoVO(videoId);
-        videoDetailsPageVO.setVideo(videoVO);
+        videoDetailPageVO.setVideo(videoVO);
         List<CollectionVO> collectionList = collectionMapper.selectCollectionListByVideoId(videoId,0);
         List<CollectionVO> seriesList = collectionMapper.selectCollectionListByVideoId(videoId,1);
-        videoDetailsPageVO.setCollectionList(collectionList);
-        videoDetailsPageVO.setSeriesList(seriesList);
-        return ApiResultBuilder.success(videoDetailsPageVO);
+        videoDetailPageVO.setCollectionList(collectionList);
+        videoDetailPageVO.setSeriesList(seriesList);
+        return ApiResultBuilder.success(videoDetailPageVO);
 
     }
 }

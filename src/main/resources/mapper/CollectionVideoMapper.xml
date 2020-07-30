@@ -9,10 +9,7 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
-  <resultMap id="CollectionVideoVO" type="com.whc.mix_api.model.vo.CollectionVideoVO">
-    <collection property="videoList" column="id = video_id"
-                select="com.whc.mix_api.mapper.VideoMapper.selectVideoVO"/>
-  </resultMap>
+
   <sql id="Base_Column_List">
     id, collection_id, video_id, sort, create_time, update_time
   </sql>
@@ -106,8 +103,10 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="selectCollectionVideoVOList" resultMap="CollectionVideoVO">
-    select video_id from collection_video a  where a.collection_id =#{collectionId} order by a.sort,a.update_time desc
+  <select id="selectCollectionVideoVOList" resultMap="com.whc.mix_api.mapper.VideoMapper.VideoVO">
+    select b.id, b.name, b.introduction, b.rating_num, b.watch_num, b.favorite_num , 1 as director,
+        2 as writer,
+        3 as star from collection_video a join video b on a.video_id = b.id where a.collection_id =#{collectionId} order by a.sort,a.update_time desc
   </select>
 
 </mapper>

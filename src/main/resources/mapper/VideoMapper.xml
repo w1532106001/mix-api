@@ -5,6 +5,7 @@
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="introduction" jdbcType="VARCHAR" property="introduction"/>
+        <result column="cover_url" jdbcType="VARCHAR" property="coverUrl"/>
         <result column="rating_num" jdbcType="DOUBLE" property="ratingNum"/>
         <result column="watch_num" jdbcType="INTEGER" property="watchNum"/>
         <result column="favorite_num" jdbcType="INTEGER" property="favoriteNum"/>
@@ -18,6 +19,7 @@
         <result column="rating_num" jdbcType="DOUBLE" property="ratingNum"/>
         <result column="watch_num" jdbcType="INTEGER" property="watchNum"/>
         <result column="favorite_num" jdbcType="INTEGER" property="favoriteNum"/>
+        <result column="cover_url" jdbcType="VARCHAR" property="coverUrl"/>
         <collection property="tagList" column="id = id" ofType="com.whc.mix_api.model.vo.TagVO"
                     select="com.whc.mix_api.mapper.VideoTagMapper.getVideoTagVO"/>
         <collection property="directorList" column="{videoId = id,type = director}"
@@ -34,7 +36,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-    id, name, introduction, rating_num, watch_num, favorite_num, create_time, update_time
+    id, name, introduction, rating_num, cover_url, watch_num, favorite_num, create_time, update_time
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select

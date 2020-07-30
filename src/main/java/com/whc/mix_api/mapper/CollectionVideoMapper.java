@@ -1,7 +1,7 @@
 package com.whc.mix_api.mapper;
 
 import com.whc.mix_api.model.CollectionVideo;
-import com.whc.mix_api.model.vo.CollectionVideoVO;
+import com.whc.mix_api.model.vo.VideoVO;
 
 import java.util.List;
 
@@ -18,5 +18,5 @@ public interface CollectionVideoMapper {
 
     int updateByPrimaryKey(CollectionVideo record);
 
-    List<CollectionVideoVO> selectCollectionVideoVOList(Integer collectionId);
+    List<VideoVO> selectCollectionVideoVOList(Integer collectionId);
 }

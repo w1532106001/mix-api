@@ -12,7 +12,7 @@ import java.util.List;
  * @description
  */
 @Data
-public class VideoDetailsPageVO {
+public class VideoDetailPageVO {
     @ApiModelProperty("视频对象")
     private VideoVO video;
     @ApiModelProperty("合集")

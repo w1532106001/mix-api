@@ -21,13 +21,13 @@ public enum ApiResultCode {
      * 未登录或token已失效
      */
     @ApiModelProperty("未登录或token已失效")
-    UNAUTHORIZED(0, "未登录或token已失效"),
+    UNAUTHORIZED(1, "未登录或token已失效"),
 
     /**
      * 操作成功
      */
     @ApiModelProperty("操作成功")
-    SUCCESS(1, "操作成功"),
+    SUCCESS(0, "操作成功"),
     ;
 
     ApiResultCode(int code, String description) {
