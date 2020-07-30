@@ -9,6 +9,13 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+
+  <resultMap id="TagVO" type="com.whc.mix_api.model.vo.TagVO">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="group_id" jdbcType="INTEGER" property="groupId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+
   <sql id="Base_Column_List">
     id, group_id, name, sort, create_time, update_time
   </sql>
@@ -101,4 +108,9 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectTagVOListByTagGroupId" resultMap="TagVO">
+    select id, group_id, name from tag where group_id = #{tagGroupId} order by sort,update_time desc
+  </select>
+
 </mapper>

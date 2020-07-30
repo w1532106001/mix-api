@@ -11,6 +11,13 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+  <resultMap id="BannerVO" type="com.whc.mix_api.model.vo.BannerVO">
+    <result column="video_id" jdbcType="INTEGER" property="videoId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="Introduction" jdbcType="VARCHAR" property="introduction" />
+    <result column="banner_url" jdbcType="VARCHAR" property="bannerUrl" />
+    <result column="rating_num" jdbcType="DOUBLE" property="ratingNum" />
+  </resultMap>
   <sql id="Base_Column_List">
     id, video_id, name, Introduction, banner_url, show, create_time, update_time
   </sql>
@@ -126,8 +133,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="getBannerVO" resultType="com.whc.mix_api.model.vo.BannerVO">
-    select id, video_id, name, Introduction, banner_url, b.rating_num
-    from banner a join video b on a.video_id = b.id where a.show = 1
+  <select id="getBannerVO" resultMap="BannerVO">
+    select a.name,a.Introduction,a.banner_url,a.video_id,b.rating_num from banner a join video b on a.video_id = b.id where a.show = 1
   </select>
 </mapper>

@@ -13,20 +13,23 @@ public class VideoEpisode implements Serializable {
     @ApiModelProperty(value = "名称")
     private String name;
 
+    @ApiModelProperty(value = "播放地址")
+    private String playUrl;
+
+    @ApiModelProperty(value = "视频缩略图")
+    private String thumbnailUrl;
+
     @ApiModelProperty(value = "观看数")
     private Integer watchNum;
+
+    @ApiModelProperty(value = "排序")
+    private Integer sort;
 
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
 
     @ApiModelProperty(value = "修改时间")
     private Date updateTime;
-
-    @ApiModelProperty(value = "播放地址")
-    private String playUrl;
-
-    @ApiModelProperty(value = "视频缩略图")
-    private String thumbnailUrl;
 
     private static final long serialVersionUID = 1L;
 
@@ -54,12 +57,36 @@ public class VideoEpisode implements Serializable {
         this.name = name;
     }
 
+    public String getPlayUrl() {
+        return playUrl;
+    }
+
+    public void setPlayUrl(String playUrl) {
+        this.playUrl = playUrl;
+    }
+
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
+    }
+
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
+    }
+
     public Integer getWatchNum() {
         return watchNum;
     }
 
     public void setWatchNum(Integer watchNum) {
         this.watchNum = watchNum;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 
     public Date getCreateTime() {
@@ -76,21 +103,5 @@ public class VideoEpisode implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public String getPlayUrl() {
-        return playUrl;
-    }
-
-    public void setPlayUrl(String playUrl) {
-        this.playUrl = playUrl;
-    }
-
-    public String getThumbnailUrl() {
-        return thumbnailUrl;
-    }
-
-    public void setThumbnailUrl(String thumbnailUrl) {
-        this.thumbnailUrl = thumbnailUrl;
     }
 }

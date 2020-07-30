@@ -5,11 +5,16 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="collection_id" jdbcType="INTEGER" property="collectionId" />
     <result column="video_id" jdbcType="INTEGER" property="videoId" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+  <resultMap id="CollectionVideoVO" type="com.whc.mix_api.model.vo.CollectionVideoVO">
+    <collection property="videoList" column="id = video_id"
+                select="com.whc.mix_api.mapper.VideoMapper.selectVideoVO"/>
+  </resultMap>
   <sql id="Base_Column_List">
-    id, collection_id, video_id, create_time, update_time
+    id, collection_id, video_id, sort, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -25,10 +30,10 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into collection_video (collection_id, video_id, create_time, 
-      update_time)
-    values (#{collectionId,jdbcType=INTEGER}, #{videoId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+    insert into collection_video (collection_id, video_id, sort, 
+      create_time, update_time)
+    values (#{collectionId,jdbcType=INTEGER}, #{videoId,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.whc.mix_api.model.CollectionVideo">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -41,6 +46,9 @@
       </if>
       <if test="videoId != null">
         video_id,
+      </if>
+      <if test="sort != null">
+        sort,
       </if>
       <if test="createTime != null">
         create_time,
@@ -55,6 +63,9 @@
       </if>
       <if test="videoId != null">
         #{videoId,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -73,6 +84,9 @@
       <if test="videoId != null">
         video_id = #{videoId,jdbcType=INTEGER},
       </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -86,8 +100,14 @@
     update collection_video
     set collection_id = #{collectionId,jdbcType=INTEGER},
       video_id = #{videoId,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectCollectionVideoVOList" resultMap="CollectionVideoVO">
+    select video_id from collection_video a  where a.collection_id =#{collectionId} order by a.sort,a.update_time desc
+  </select>
+
 </mapper>

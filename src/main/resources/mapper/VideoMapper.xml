@@ -1,121 +1,142 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.whc.mix_api.mapper.VideoMapper">
-  <resultMap id="BaseResultMap" type="com.whc.mix_api.model.Video">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="introduction" jdbcType="VARCHAR" property="introduction" />
-    <result column="rating_num" jdbcType="DOUBLE" property="ratingNum" />
-    <result column="cover_url" jdbcType="VARCHAR" property="coverUrl" />
-    <result column="watch_num" jdbcType="INTEGER" property="watchNum" />
-    <result column="favorite_num" jdbcType="INTEGER" property="favoriteNum" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, name, introduction, rating_num,cover_url, watch_num, favorite_num, create_time, update_time
+    <resultMap id="BaseResultMap" type="com.whc.mix_api.model.Video">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="introduction" jdbcType="VARCHAR" property="introduction"/>
+        <result column="rating_num" jdbcType="DOUBLE" property="ratingNum"/>
+        <result column="watch_num" jdbcType="INTEGER" property="watchNum"/>
+        <result column="favorite_num" jdbcType="INTEGER" property="favoriteNum"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <resultMap id="VideoVO" type="com.whc.mix_api.model.vo.VideoVO">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="introduction" jdbcType="VARCHAR" property="introduction"/>
+        <result column="rating_num" jdbcType="DOUBLE" property="ratingNum"/>
+        <result column="watch_num" jdbcType="INTEGER" property="watchNum"/>
+        <result column="favorite_num" jdbcType="INTEGER" property="favoriteNum"/>
+        <collection property="tagList" column="id = id" ofType="com.whc.mix_api.model.vo.TagVO"
+                    select="com.whc.mix_api.mapper.VideoTagMapper.getVideoTagVO"/>
+        <collection property="directorList" column="{videoId = id,type = director}"
+                    ofType="com.whc.mix_api.model.vo.CastMemberVO"
+                    select="com.whc.mix_api.mapper.CastMemberMapper.selectCastMemberVOList"/>
+        <collection property="writerList" column="{videoId = id,type = writer}"
+                    ofType="com.whc.mix_api.model.vo.CastMemberVO"
+                    select="com.whc.mix_api.mapper.CastMemberMapper.selectCastMemberVOList"/>
+        <collection property="starList" column="{videoId = id,type = star}"
+                    ofType="com.whc.mix_api.model.vo.CastMemberVO"
+                    select="com.whc.mix_api.mapper.CastMemberMapper.selectCastMemberVOList"/>
+        <collection property="episodeList" column="videoId = id" ofType="com.whc.mix_api.model.vo.VideoEpisodeVO"
+                    select="com.whc.mix_api.mapper.VideoEpisodeMapper.selectVideoEpisodeVOList"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, name, introduction, rating_num, watch_num, favorite_num, create_time, update_time
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from video
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from video
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from video
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.whc.mix_api.model.Video">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into video (name, introduction, rating_num, 
-      watch_num, favorite_num,cover_url, create_time,
-      update_time)
-    values (#{name,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR},#{cover_url,jdbcType=VARCHAR}, #{ratingNum,jdbcType=DOUBLE},
-      #{watchNum,jdbcType=INTEGER}, #{favoriteNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.whc.mix_api.model.Video">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into video
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="name != null">
-        name,
-      </if>
-      <if test="introduction != null">
-        introduction,
-      </if>
-      <if test="ratingNum != null">
-        rating_num,
-      </if>
-      <if test="watchNum != null">
-        watch_num,
-      </if>
-      <if test="favoriteNum != null">
-        favorite_num,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="introduction != null">
-        #{introduction,jdbcType=VARCHAR},
-      </if>
-      <if test="ratingNum != null">
-        #{ratingNum,jdbcType=DOUBLE},
-      </if>
-      <if test="watchNum != null">
-        #{watchNum,jdbcType=INTEGER},
-      </if>
-      <if test="favoriteNum != null">
-        #{favoriteNum,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.whc.mix_api.model.Video">
-    update video
-    <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="introduction != null">
-        introduction = #{introduction,jdbcType=VARCHAR},
-      </if>
-      <if test="ratingNum != null">
-        rating_num = #{ratingNum,jdbcType=DOUBLE},
-      </if>
-      <if test="watchNum != null">
-        watch_num = #{watchNum,jdbcType=INTEGER},
-      </if>
-      <if test="favoriteNum != null">
-        favorite_num = #{favoriteNum,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.whc.mix_api.model.Video">
+    <insert id="insert" parameterType="com.whc.mix_api.model.Video">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into video (name, introduction, rating_num,
+        watch_num, favorite_num, create_time,
+        update_time)
+        values (#{name,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, #{ratingNum,jdbcType=DOUBLE},
+        #{watchNum,jdbcType=INTEGER}, #{favoriteNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.whc.mix_api.model.Video">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into video
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                name,
+            </if>
+            <if test="introduction != null">
+                introduction,
+            </if>
+            <if test="ratingNum != null">
+                rating_num,
+            </if>
+            <if test="watchNum != null">
+                watch_num,
+            </if>
+            <if test="favoriteNum != null">
+                favorite_num,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="introduction != null">
+                #{introduction,jdbcType=VARCHAR},
+            </if>
+            <if test="ratingNum != null">
+                #{ratingNum,jdbcType=DOUBLE},
+            </if>
+            <if test="watchNum != null">
+                #{watchNum,jdbcType=INTEGER},
+            </if>
+            <if test="favoriteNum != null">
+                #{favoriteNum,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.whc.mix_api.model.Video">
+        update video
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="introduction != null">
+                introduction = #{introduction,jdbcType=VARCHAR},
+            </if>
+            <if test="ratingNum != null">
+                rating_num = #{ratingNum,jdbcType=DOUBLE},
+            </if>
+            <if test="watchNum != null">
+                watch_num = #{watchNum,jdbcType=INTEGER},
+            </if>
+            <if test="favoriteNum != null">
+                favorite_num = #{favoriteNum,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.whc.mix_api.model.Video">
     update video
     set name = #{name,jdbcType=VARCHAR},
       introduction = #{introduction,jdbcType=VARCHAR},
@@ -127,5 +148,31 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+    <select id="selectVideoVO" resultMap="VideoVO">
+        select
+        <include refid="Base_Column_List"/>,
+        1 as director,
+        2 as writer,
+        3 as star
+        from video where id = #{id}
+    </select>
 
+    <select id="selectVideoListByVideoPageDTO" resultMap="BaseResultMap">
+        select
+        DISTINCT a.id, a.name, a.introduction, a.rating_num, a.watch_num, a.favorite_num, a.create_time, a.update_time
+        from video a left join video_tag b on a.id = b.video_id
+        <if test="tagList!=null and tagList.size()>0">
+            and b.tag_id in
+            <foreach collection="tagList" item="tag" index="index" open="(" close=")" separator=",">
+                #{tag}
+            </foreach>
+        </if>
+
+        <if test="searchWord!=null">
+            <where>
+                a.name like concat('%',#{searchWord},'%')
+            </where>
+        </if>
+        order by a.update_time desc
+    </select>
 </mapper>

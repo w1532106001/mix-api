@@ -16,5 +16,5 @@ public class CollectionVO {
     private String name;
 
     @ApiModelProperty(value = "视频列表")
-    List<VideoVO> videoList;
+    List<CollectionVideoVO> collectionVideoList;
 }

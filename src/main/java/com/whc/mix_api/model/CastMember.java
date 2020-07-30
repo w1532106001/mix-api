@@ -4,7 +4,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Writer implements Serializable {
+public class CastMember implements Serializable {
     private Integer id;
 
     @ApiModelProperty(value = "视频id")
@@ -13,14 +13,17 @@ public class Writer implements Serializable {
     @ApiModelProperty(value = "人id")
     private Integer personId;
 
+    @ApiModelProperty(value = "排序")
+    private Integer sort;
+
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
 
     @ApiModelProperty(value = "修改时间")
     private Date updateTime;
 
-    @ApiModelProperty(value = "排序")
-    private Integer sort;
+    @ApiModelProperty(value = "0 导演 1编剧 2演员")
+    private Integer type;
 
     private static final long serialVersionUID = 1L;
 
@@ -48,6 +51,14 @@ public class Writer implements Serializable {
         this.personId = personId;
     }
 
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -64,11 +75,11 @@ public class Writer implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public Integer getSort() {
-        return sort;
+    public Integer getType() {
+        return type;
     }
 
-    public void setSort(Integer sort) {
-        this.sort = sort;
+    public void setType(Integer type) {
+        this.type = type;
     }
 }

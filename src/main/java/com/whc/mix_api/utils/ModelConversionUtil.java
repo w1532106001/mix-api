@@ -1,6 +1,5 @@
 package com.whc.mix_api.utils;
 
-import com.whc.mix_api.model.Collection;
 import com.whc.mix_api.model.vo.CollectionVO;
 
 
@@ -11,9 +10,9 @@ import com.whc.mix_api.model.vo.CollectionVO;
  */
 
 public class ModelConversionUtil {
-    public static CollectionVO convertCollectionVO(Collection collection){
-        CollectionVO collectionVO = new CollectionVO();
-        collectionVO.setName(collection.getName());
-        return collectionVO;
-    }
+//    public static CollectionVO convertCollectionVO(Collection collection){
+//        CollectionVO collectionVO = new CollectionVO();
+//        collectionVO.setName(collection.getName());
+//        return collectionVO;
+//    }
 }

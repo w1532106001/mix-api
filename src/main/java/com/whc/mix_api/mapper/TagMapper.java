@@ -1,6 +1,9 @@
 package com.whc.mix_api.mapper;
 
 import com.whc.mix_api.model.Tag;
+import com.whc.mix_api.model.vo.TagVO;
+
+import java.util.List;
 
 public interface TagMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +17,6 @@ public interface TagMapper {
     int updateByPrimaryKeySelective(Tag record);
 
     int updateByPrimaryKey(Tag record);
+
+    List<TagVO> selectTagVOListByTagGroupId(Integer tagGroupId);
 }

@@ -4,23 +4,20 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Star implements Serializable {
+public class VideoTag implements Serializable {
     private Integer id;
 
     @ApiModelProperty(value = "视频id")
     private Integer videoId;
 
-    @ApiModelProperty(value = "人id")
-    private Integer personId;
+    @ApiModelProperty(value = "标签id")
+    private Integer tagId;
 
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
 
     @ApiModelProperty(value = "修改时间")
     private Date updateTime;
-
-    @ApiModelProperty(value = "排序")
-    private Integer sort;
 
     private static final long serialVersionUID = 1L;
 
@@ -40,12 +37,12 @@ public class Star implements Serializable {
         this.videoId = videoId;
     }
 
-    public Integer getPersonId() {
-        return personId;
+    public Integer getTagId() {
+        return tagId;
     }
 
-    public void setPersonId(Integer personId) {
-        this.personId = personId;
+    public void setTagId(Integer tagId) {
+        this.tagId = tagId;
     }
 
     public Date getCreateTime() {
@@ -62,13 +59,5 @@ public class Star implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public Integer getSort() {
-        return sort;
-    }
-
-    public void setSort(Integer sort) {
-        this.sort = sort;
     }
 }

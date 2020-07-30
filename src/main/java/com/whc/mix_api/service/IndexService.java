@@ -2,6 +2,7 @@ package com.whc.mix_api.service;
 
 
 import com.whc.mix_api.api.ApiResult;
+import com.whc.mix_api.dto.VideoPageDTO;
 import org.springframework.web.servlet.function.ServerResponse;
 
 /**
@@ -13,11 +14,9 @@ import org.springframework.web.servlet.function.ServerResponse;
 public interface IndexService {
     ApiResult getVideoHomePageData();
 
-    ApiResult getCategoryGroupList();
+    ApiResult getTagGroupList(Integer type);
 
-    ApiResult getVideoCategoryPage(int pageSize, int currPage);
-
-    ApiResult getVideoSearchPage(int pageSize, int currPage);
+    ApiResult getVideoList(VideoPageDTO videoPageDTO);
 
     ApiResult getVideoDetailData(int videoId);
 }

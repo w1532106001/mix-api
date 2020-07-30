@@ -13,9 +13,6 @@ public class Video implements Serializable {
     @ApiModelProperty(value = "介绍")
     private String introduction;
 
-    @ApiModelProperty(value = "封面")
-    private String coverUrl;
-
     @ApiModelProperty(value = "评分")
     private Double ratingNum;
 

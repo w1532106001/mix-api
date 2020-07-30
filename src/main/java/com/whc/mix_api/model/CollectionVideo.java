@@ -13,6 +13,9 @@ public class CollectionVideo implements Serializable {
     @ApiModelProperty(value = "视频id")
     private Integer videoId;
 
+    @ApiModelProperty(value = "排序")
+    private Integer sort;
+
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
 
@@ -43,6 +46,14 @@ public class CollectionVideo implements Serializable {
 
     public void setVideoId(Integer videoId) {
         this.videoId = videoId;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
     }
 
     public Date getCreateTime() {

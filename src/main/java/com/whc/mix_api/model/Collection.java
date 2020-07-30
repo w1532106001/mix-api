@@ -10,6 +10,12 @@ public class Collection implements Serializable {
     @ApiModelProperty(value = "合集名称")
     private String name;
 
+    @ApiModelProperty(value = "排序")
+    private Integer sort;
+
+    @ApiModelProperty(value = "0 合集 1系列")
+    private Integer type;
+
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
 
@@ -32,6 +38,22 @@ public class Collection implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public Date getCreateTime() {

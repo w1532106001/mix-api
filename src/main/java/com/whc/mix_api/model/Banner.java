@@ -22,8 +22,10 @@ public class Banner implements Serializable {
     @ApiModelProperty(value = "是否展示 1展示 0不展示")
     private Boolean show;
 
+    @ApiModelProperty(value = "创建时间")
     private Date createTime;
 
+    @ApiModelProperty(value = "修改时间")
     private Date updateTime;
 
     private static final long serialVersionUID = 1L;

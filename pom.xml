@@ -144,6 +144,18 @@
 			<version>1.13.1</version>
 		</dependency>
 
+<!--		热启动-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>5.2.0</version>
+		</dependency>
 
 	</dependencies>
 
