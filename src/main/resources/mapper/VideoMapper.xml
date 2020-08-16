@@ -162,12 +162,13 @@
     <select id="selectVideoListByVideoPageDTO" resultMap="BaseResultMap">
         select
         DISTINCT a.id, a.name, a.introduction, a.rating_num, a.watch_num,a.cover_url, a.favorite_num, a.create_time, a.update_time
-        from video a left join video_tag b on a.id = b.video_id
+        from video a
         <if test="tagList!=null and tagList.size()>0">
-            and b.tag_id in
+            inner join video_tag b on a.id = b.video_id and b.tag_id in
             <foreach collection="tagList" item="tag" index="index" open="(" close=")" separator=",">
                 #{tag}
             </foreach>
+            GROUP BY video_id HAVING count(video_id)> ${tagList.size()-1}
         </if>
 
         <if test="searchWord!=null">
