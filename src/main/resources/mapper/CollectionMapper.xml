@@ -16,6 +16,12 @@
                     select="com.whc.mix_api.mapper.CollectionVideoMapper.selectCollectionVideoVOList"/>
     </resultMap>
 
+    <resultMap id="CollectionVO2" type="com.whc.mix_api.model.vo.CollectionVO">
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <collection property="videoList" column="collectionId = id"
+                    select="com.whc.mix_api.mapper.CollectionVideoMapper.selectCollectionVideoVOList2"/>
+    </resultMap>
+
     <sql id="Base_Column_List">
     id, name, sort, type, create_time, update_time
   </sql>
@@ -109,7 +115,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-    <select id="selectLastUpdateTimeTenData" resultMap="CollectionVO">
+    <select id="selectLastUpdateTimeTenData" resultMap="CollectionVO2">
     select id,name from collection a where a.type = ${type} order by a.update_time desc limit 10
   </select>
 

@@ -35,6 +35,13 @@
                     select="com.whc.mix_api.mapper.VideoEpisodeMapper.selectVideoEpisodeVOList"/>
     </resultMap>
 
+    <resultMap id="VideoVO2" type="com.whc.mix_api.model.vo.VideoVO">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="introduction" jdbcType="VARCHAR" property="introduction"/>
+        <result column="cover_url" jdbcType="VARCHAR" property="coverUrl"/>
+    </resultMap>
+
     <sql id="Base_Column_List">
     id, name, introduction, rating_num, cover_url, watch_num, favorite_num, create_time, update_time
   </sql>
