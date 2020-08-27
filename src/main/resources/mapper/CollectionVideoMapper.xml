@@ -109,4 +109,8 @@
         3 as star from collection_video a join video b on a.video_id = b.id where a.collection_id =#{collectionId} order by a.sort,a.update_time desc
   </select>
 
+  <select id="selectCollectionVideoVOList2" resultMap="com.whc.mix_api.mapper.VideoMapper.VideoVO2">
+    select b.id, b.name, b.introduction,b.cover_url from collection_video a join video b on a.video_id = b.id where a.collection_id =#{collectionId} order by a.sort,a.update_time desc
+  </select>
+
 </mapper>

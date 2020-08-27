@@ -19,4 +19,6 @@ public interface CollectionVideoMapper {
     int updateByPrimaryKey(CollectionVideo record);
 
     List<VideoVO> selectCollectionVideoVOList(Integer collectionId);
+
+    List<VideoVO> selectCollectionVideoVOList2(Integer collectionId);
 }

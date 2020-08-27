@@ -30,7 +30,7 @@ public class SwaggerConfig {
                 .useDefaultResponseMessages(false)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.whc.base_project"))
+                .apis(RequestHandlerSelectors.basePackage("com.whc.mix_api"))
                 .paths(PathSelectors.any())
                 .build()
                 .enable(true);
