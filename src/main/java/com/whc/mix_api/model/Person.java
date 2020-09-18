@@ -1,5 +1,6 @@
 package com.whc.mix_api.model;
 
+import com.whc.mix_api.model.vo.PersonVO;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
@@ -70,5 +71,13 @@ public class Person implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public PersonVO toPersonVO(){
+        PersonVO personVO = new PersonVO();
+        personVO.setId(id);
+        personVO.setAvatarUrl(avatarUrl);
+        personVO.setIntroduction(introduction);
+        return personVO;
     }
 }

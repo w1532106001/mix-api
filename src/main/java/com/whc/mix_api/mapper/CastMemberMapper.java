@@ -25,4 +25,6 @@ public interface CastMemberMapper {
      * @return
      */
     List<CastMemberVO> selectCastMemberVOList(@Param("videoId") int videoId,@Param("type") int type);
+
+    List<CastMember> selectCastMemberList(@Param("personId")int personId);
 }

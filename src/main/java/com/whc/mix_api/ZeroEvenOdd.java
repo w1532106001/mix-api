@@ -10,8 +10,9 @@ import java.util.function.IntConsumer;
 
 public class ZeroEvenOdd {
     private static Object object = new Object();
+
     public static void main(String[] args) {
-        Thread zero = new Thread(){
+        Thread zero = new Thread() {
             @Override
             public void run() {
                 super.run();
@@ -30,52 +31,59 @@ public class ZeroEvenOdd {
                         }
                     }
                 }
-                synchronized (object){
-                    object.notifyAll();
-                }
             }
         };
-        Thread even = new Thread(){
+        Thread even = new Thread() {
             @Override
             public void run() {
                 super.run();
-                while (i <= n ) {
+                while (i <= n && !Thread.currentThread().isInterrupted()) {
                     synchronized (object) {
-                        if (!isPrintZero && (i&1)==1) {
+                        if (!isPrintZero && (i & 1) == 0) {
                             System.out.println(i);
                             isPrintZero = true;
                         }
-
-                        try {
+                        if (i == n) {
                             object.notifyAll();
-                            object.wait();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                            Thread.currentThread().interrupt();
+                        }else{
+                            try {
+                                object.notifyAll();
+                                object.wait();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                         }
+
                     }
                 }
 
             }
         };
 
-        Thread odd = new Thread(){
+        Thread odd = new Thread() {
             @Override
             public void run() {
                 super.run();
-                while (i <= n) {
+                while (i <= n && !Thread.currentThread().isInterrupted()) {
                     synchronized (object) {
-                        if (!isPrintZero && (i&1)==0) {
+                        if (!isPrintZero && (i & 1) == 1) {
                             System.out.println(i);
                             isPrintZero = true;
                         }
-
-                        try {
+                        if (i == n) {
                             object.notifyAll();
-                            object.wait();
+                            Thread.currentThread().interrupt();
+                        }else {
+                            try {
+                                object.notifyAll();
+                                object.wait();
 
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                         }
+
                     }
                 }
             }
@@ -86,7 +94,7 @@ public class ZeroEvenOdd {
         odd.start();
     }
 
-    private static int n = 5;
+    private static int n = 2;
     static int i = 0;
     static boolean isPrintZero = true;
 
@@ -113,7 +121,7 @@ public class ZeroEvenOdd {
     public void even(IntConsumer printNumber) throws InterruptedException {
         while (i + 1 != n) {
             synchronized (this) {
-                if (isPrintZero || (i&1)==1) {
+                if (isPrintZero || (i & 1) == 1) {
                     wait();
                 }
                 notifyAll();
@@ -126,7 +134,7 @@ public class ZeroEvenOdd {
     public void odd(IntConsumer printNumber) throws InterruptedException {
         while (i + 1 != n) {
             synchronized (this) {
-                if (isPrintZero || (i&1)==0) {
+                if (isPrintZero || (i & 1) == 0) {
                     wait();
                 }
                 notifyAll();

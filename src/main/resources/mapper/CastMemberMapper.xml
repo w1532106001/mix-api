@@ -127,4 +127,7 @@
     <select id="selectCastMemberVOList" resultMap="CastMemberVO">
     select a.person_id,b.name,b.avatar_url,b.introduction,a.type from cast_member a join person b on a.person_id = b.id where a.video_id = #{videoId} and a.type = #{type} order by a.sort,a.update_time desc
   </select>
+    <select id="selectCastMemberList" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from cast_member a where a.person_id = #{personId};
+    </select>
 </mapper>
