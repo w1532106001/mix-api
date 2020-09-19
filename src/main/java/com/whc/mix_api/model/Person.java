@@ -77,6 +77,7 @@ public class Person implements Serializable {
     public PersonVO toPersonVO() {
         PersonVO personVO = new PersonVO();
         personVO.setId(id);
+        personVO.setName(name);
         personVO.setAvatarUrl(avatarUrl);
         personVO.setIntroduction(introduction);
         return personVO;

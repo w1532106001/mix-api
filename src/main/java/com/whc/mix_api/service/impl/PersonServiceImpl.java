@@ -43,9 +43,11 @@ public class PersonServiceImpl implements PersonService {
             List<CastMember> castMemberList = castMemberMapper.selectCastMemberList(person.getId());
             List<VideoSimpleVO> videoSimpleVOList = new ArrayList<>();
             List<Integer> videoIdList = castMemberList.parallelStream().map(CastMember::getVideoId).distinct().collect(Collectors.toList());
-            List<Video> videoList = videoMapper.selectVideoListByVideoIds(videoIdList);
-            for (Video video : videoList) {
-                videoSimpleVOList.add(video.toVideoSimpleVO());
+            if(videoIdList.size()>0){
+                List<Video> videoList = videoMapper.selectVideoListByVideoIds(videoIdList);
+                for (Video video : videoList) {
+                    videoSimpleVOList.add(video.toVideoSimpleVO());
+                }
             }
             personVO.setVideoList(videoSimpleVOList);
             return ApiResultBuilder.success(personVO);
