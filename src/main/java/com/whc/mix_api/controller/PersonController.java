@@ -2,8 +2,10 @@ package com.whc.mix_api.controller;
 
 import com.whc.mix_api.api.ApiResult;
 import com.whc.mix_api.service.PersonService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
@@ -20,7 +22,8 @@ public class PersonController {
     private PersonService personService;
 
     @GetMapping("/{id}")
-    public ApiResult getPerson(@PathVariable("id") Integer id){
+    public ApiResult getPerson(@PathVariable("id") Integer id) {
         return personService.getPerson(id);
     }
+
 }

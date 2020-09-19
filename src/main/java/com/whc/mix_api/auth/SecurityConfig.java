@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     // 加密密码的，安全第一嘛~
     @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder(){
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .apply(loginAuthenticationSecurityConfig)
                 .and()
-                .addFilterBefore(loginAuthorizationFilter,UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(loginAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
                 // 不需要session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 

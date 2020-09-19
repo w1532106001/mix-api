@@ -5,7 +5,9 @@ import com.whc.mix_api.model.User;
 import com.whc.mix_api.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +34,7 @@ public class AuthController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @PostMapping("/register")
-    public int registerUser(String username,String password){
+    public int registerUser(String username, String password) {
         User user = new User();
         user.setUsername(username);
         // 记得注册的时候把密码加密一下
@@ -48,8 +50,8 @@ public class AuthController {
     }
 
     @PostMapping("/smsLoginCode")
-    public void sendSMSVerifyCodeByLogin(String mobile,String code) throws Exception {
-        userService.send(mobile,code);
+    public void sendSMSVerifyCodeByLogin(String mobile, String code) throws Exception {
+        userService.send(mobile, code);
     }
 }
 

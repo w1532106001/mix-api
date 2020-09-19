@@ -1,8 +1,6 @@
 package com.whc.mix_api;
 
-import lombok.Data;
-
-import java.util.*;
+import java.util.LinkedList;
 
 /**
  * @author whc
@@ -22,12 +20,13 @@ import java.util.*;
 class LRUCache {
     int capacity;
     LinkedList<Node> nodeList;
+
     public LRUCache(int capacity) {
         this.capacity = capacity;
         nodeList = new LinkedList<>();
     }
 
-    class Node{
+    class Node {
         private int key;
         private int value;
 
@@ -39,20 +38,20 @@ class LRUCache {
 
     public static void main(String[] args) {
         int num = 3000;
-        LRUCache cache = new LRUCache( num /* 缓存容量 */ );
+        LRUCache cache = new LRUCache(num /* 缓存容量 */);
         System.out.println("put开始");
         for (int i = 0; i < num; i++) {
-            cache.put(i,i);
+            cache.put(i, i);
         }
         System.out.println("put结束");
         long startTime = System.currentTimeMillis();
         System.out.println(cache.get(2580));
-        System.out.println(System.currentTimeMillis()-startTime);
+        System.out.println(System.currentTimeMillis() - startTime);
     }
 
     public int get(int key) {
         for (int i = 0; i < nodeList.size(); i++) {
-           Node node = nodeList.get(i);
+            Node node = nodeList.get(i);
             if (node.key == key) {
                 nodeList.remove(i);
                 nodeList.addFirst(node);
@@ -66,19 +65,19 @@ class LRUCache {
         boolean isHas = false;
         for (int i = 0; i < nodeList.size(); i++) {
             Node node = nodeList.get(i);
-            if(node.key==key){
+            if (node.key == key) {
                 nodeList.remove(i);
-                nodeList.addFirst(new Node(key,value));
+                nodeList.addFirst(new Node(key, value));
                 isHas = true;
                 break;
             }
         }
-        if(!isHas){
-            if(nodeList.size()<capacity){
-                nodeList.addFirst(new Node(key,value));
-            }else{
-                nodeList.remove(capacity-1);
-                nodeList.addFirst(new Node(key,value));
+        if (!isHas) {
+            if (nodeList.size() < capacity) {
+                nodeList.addFirst(new Node(key, value));
+            } else {
+                nodeList.remove(capacity - 1);
+                nodeList.addFirst(new Node(key, value));
             }
         }
 

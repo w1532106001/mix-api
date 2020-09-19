@@ -11,8 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan("com.whc.mix_api.mapper")
 public class MixApiApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MixApiApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MixApiApplication.class, args);
+    }
 
 }

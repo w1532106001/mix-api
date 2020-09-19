@@ -185,9 +185,11 @@
         </if>
         order by a.update_time desc
     </select>
-    
+
     <select id="selectVideoListByVideoIds" resultMap="BaseResultMap">
-        select <include refid="Base_Column_List"/> from video where id in
+        select
+        <include refid="Base_Column_List"/>
+        from video where id in
         <foreach collection="ids" open="(" close=")" separator="," item="id" index="i">#{id}</foreach>
     </select>
 </mapper>

@@ -1,6 +1,5 @@
 package com.whc.mix_api.model.vo;
 
-import com.whc.mix_api.model.Person;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,8 +29,6 @@ public class PersonVO {
 
     @ApiModelProperty(value = "视频列表")
     private List<VideoSimpleVO> videoList;
-
-
 
 
 }

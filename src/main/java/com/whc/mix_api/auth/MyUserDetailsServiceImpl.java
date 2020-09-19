@@ -29,22 +29,23 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         String loginType = request.getParameter("loginType");
         User user = null;
-        if(loginType!=null){
-            switch (loginType){
+        if (loginType != null) {
+            switch (loginType) {
                 case "1":
                     user = userMapper.selectByUserName(s);
                     break;
                 case "2":
                     user = userMapper.selectByMobile(s);
                     break;
-                default: user = userMapper.selectByUserName(s);
+                default:
+                    user = userMapper.selectByUserName(s);
             }
-        }else{
+        } else {
             user = userMapper.selectByUserName(s);
         }
 
 
-        if(user == null){
+        if (user == null) {
             throw new UsernameNotFoundException("用户不存在");
         }
         return new JwtUser(user);

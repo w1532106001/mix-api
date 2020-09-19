@@ -14,7 +14,7 @@ import java.util.Collections;
  * @description
  */
 
-public class JwtUser implements UserDetails{
+public class JwtUser implements UserDetails {
     private Integer id;
     private String username;
     private String password;

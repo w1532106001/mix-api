@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 @RequestMapping("/index")
 public class IndexController {
     @PostMapping("")
-    public String indexHtml(){
+    public String indexHtml() {
         return "index/index";
     }
 
@@ -24,21 +24,22 @@ public class IndexController {
     private IndexService indexService;
 
     @GetMapping("/videoHomePageData")
-    public ApiResult getVideoHomePageData(){
+    public ApiResult getVideoHomePageData() {
         return indexService.getVideoHomePageData();
     }
 
     @GetMapping("/tagGroupList")
-    public ApiResult getTagGroupList(@RequestParam("type") Integer type){
+    public ApiResult getTagGroupList(@RequestParam("type") Integer type) {
         return indexService.getTagGroupList(type);
     }
 
     @GetMapping("/videoList")
-    public ApiResult getVideoList(VideoPageDTO videoPageDTO){
+    public ApiResult getVideoList(VideoPageDTO videoPageDTO) {
         return indexService.getVideoList(videoPageDTO);
     }
+
     @GetMapping("/videoDetailData")
-    public ApiResult getVideoDetailData(@RequestParam("videoId") Integer videoId){
+    public ApiResult getVideoDetailData(@RequestParam("videoId") Integer videoId) {
         return indexService.getVideoDetailData(videoId);
     }
 }

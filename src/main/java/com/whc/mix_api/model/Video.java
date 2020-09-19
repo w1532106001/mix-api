@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+
 @Data
 public class Video implements Serializable {
     private Integer id;
@@ -37,7 +38,7 @@ public class Video implements Serializable {
     private static final long serialVersionUID = 1L;
 
 
-    public VideoSimpleVO toVideoSimpleVO(){
+    public VideoSimpleVO toVideoSimpleVO() {
         VideoSimpleVO videoSimpleVO = new VideoSimpleVO();
         videoSimpleVO.setId(id);
         videoSimpleVO.setCoverUrl(coverUrl);

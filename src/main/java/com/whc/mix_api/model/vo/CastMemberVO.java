@@ -3,8 +3,6 @@ package com.whc.mix_api.model.vo;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.util.Date;
-
 /**
  * @author whc
  * @date 2020/7/30

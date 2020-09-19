@@ -37,7 +37,7 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public ApiResult getPerson(Integer id) {
         ApiResult apiResult = checkPersonExist(id);
-        if(apiResult.getCode()== ApiResultCode.SUCCESS.getCode()){
+        if (apiResult.getCode() == ApiResultCode.SUCCESS.getCode()) {
             Person person = (Person) apiResult.getData();
             PersonVO personVO = person.toPersonVO();
             List<CastMember> castMemberList = castMemberMapper.selectCastMemberList(person.getId());
@@ -54,9 +54,9 @@ public class PersonServiceImpl implements PersonService {
         return apiResult;
     }
 
-    ApiResult checkPersonExist(Integer id){
+    ApiResult checkPersonExist(Integer id) {
         Person person = personMapper.selectByPrimaryKey(id);
-        if(person!=null){
+        if (person != null) {
             return ApiResultBuilder.success(person);
         }
         return ApiResultBuilder.fail("数据不存在");

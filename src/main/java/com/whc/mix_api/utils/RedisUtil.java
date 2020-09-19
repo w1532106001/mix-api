@@ -20,7 +20,7 @@ public class RedisUtil {
     /**
      * 默认redis中的缓存有效期20分钟
      */
-    private final int expire = 20*60;
+    private final int expire = 20 * 60;
 
     /**
      * 对存储结构为String类型的操作
@@ -577,7 +577,7 @@ public class RedisUtil {
          * 以Map的形式返回哈希表中的存储和值
          *
          * @param key 键
-         * @return Map<Strinig   ,   String>
+         * @return Map<Strinig, String>
          */
         public Map<String, String> hget(String key) {
             Jedis sjedis = getJedis();
@@ -789,9 +789,9 @@ public class RedisUtil {
         /**
          * 普通缓存，添加记录
          *
-         * @param key 键
+         * @param key     键
          * @param seconds 过期时间，以秒为单位
-         * @param value  值
+         * @param value   值
          * @return String 操作状态
          */
         public String set(String key, int seconds, String value) {
@@ -805,9 +805,9 @@ public class RedisUtil {
         /**
          * 普通缓存，添加有过期时间的记录
          *
-         * @param key 键
+         * @param key     键
          * @param seconds 过期时间，以秒为单位
-         * @param value  值
+         * @param value   值
          * @return String 操作状态
          */
         public String setEx(String key, int seconds, String value) {

@@ -45,16 +45,17 @@ public class LoginAuthenticationProvider implements AuthenticationProvider {
         UserDetails userDetails = myUserDetailsServiceImpl.loadUserByUsername(loginName);
 
         String loginType = request.getParameter("loginType");
-        switch (Integer.parseInt(loginType)){
+        switch (Integer.parseInt(loginType)) {
             case 1:
                 checkImageCode();
-                if(bCryptPasswordEncoder.matches(bCryptPasswordEncoder.encode(request.getParameter("password")),userDetails.getPassword())){
+                if (bCryptPasswordEncoder.matches(bCryptPasswordEncoder.encode(request.getParameter("password")), userDetails.getPassword())) {
                     throw new BadCredentialsException("密码错误");
                 }
                 break;
             case 2:
                 checkSmsCode();
-            default:break;
+            default:
+                break;
         }
 
         // 此时鉴权成功后，应当重新 new 一个拥有鉴权的 authenticationResult 返回
@@ -69,30 +70,30 @@ public class LoginAuthenticationProvider implements AuthenticationProvider {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         String inputCode = request.getParameter("smsCode");
         String mobile = request.getParameter("loginName");
-        String smsCode = redisUtil.getJedis().hget("smsCode",mobile);
+        String smsCode = redisUtil.getJedis().hget("smsCode", mobile);
 
-        if(smsCode == null) {
+        if (smsCode == null) {
             throw new BadCredentialsException("未检测到申请验证码");
         }
-        ValidateCode validateCode = JSONObject.parseObject(smsCode,ValidateCode.class);
+        ValidateCode validateCode = JSONObject.parseObject(smsCode, ValidateCode.class);
 
-        if(!StringUtils.equals(validateCode.getCode(),inputCode)) {
+        if (!StringUtils.equals(validateCode.getCode(), inputCode)) {
             throw new BadCredentialsException("验证码错误");
         }
     }
 
-    private void checkImageCode(){
+    private void checkImageCode() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         String inputCode = request.getParameter("imageCode");
         String loginName = request.getParameter("loginName");
-        String imageCode = redisUtil.getJedis().hget("LoginImageCode",loginName);
+        String imageCode = redisUtil.getJedis().hget("LoginImageCode", loginName);
 
-        if(imageCode == null) {
+        if (imageCode == null) {
             throw new BadCredentialsException("未检测到申请验证码");
         }
 //        ImageCode validateCode = JSONObject.parseObject(imageCode, ImageCode.class);
 
-        if(!StringUtils.equals(imageCode,inputCode)) {
+        if (!StringUtils.equals(imageCode, inputCode)) {
             throw new BadCredentialsException("验证码错误");
         }
     }

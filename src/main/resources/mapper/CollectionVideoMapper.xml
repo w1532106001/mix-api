@@ -1,99 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.whc.mix_api.mapper.CollectionVideoMapper">
-  <resultMap id="BaseResultMap" type="com.whc.mix_api.model.CollectionVideo">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="collection_id" jdbcType="INTEGER" property="collectionId" />
-    <result column="video_id" jdbcType="INTEGER" property="videoId" />
-    <result column="sort" jdbcType="INTEGER" property="sort" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="com.whc.mix_api.model.CollectionVideo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="collection_id" jdbcType="INTEGER" property="collectionId"/>
+        <result column="video_id" jdbcType="INTEGER" property="videoId"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
 
-  <sql id="Base_Column_List">
+    <sql id="Base_Column_List">
     id, collection_id, video_id, sort, create_time, update_time
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from collection_video
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from collection_video
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from collection_video
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.whc.mix_api.model.CollectionVideo">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into collection_video (collection_id, video_id, sort, 
-      create_time, update_time)
-    values (#{collectionId,jdbcType=INTEGER}, #{videoId,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.whc.mix_api.model.CollectionVideo">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into collection_video
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="collectionId != null">
-        collection_id,
-      </if>
-      <if test="videoId != null">
-        video_id,
-      </if>
-      <if test="sort != null">
-        sort,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="collectionId != null">
-        #{collectionId,jdbcType=INTEGER},
-      </if>
-      <if test="videoId != null">
-        #{videoId,jdbcType=INTEGER},
-      </if>
-      <if test="sort != null">
-        #{sort,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.whc.mix_api.model.CollectionVideo">
-    update collection_video
-    <set>
-      <if test="collectionId != null">
-        collection_id = #{collectionId,jdbcType=INTEGER},
-      </if>
-      <if test="videoId != null">
-        video_id = #{videoId,jdbcType=INTEGER},
-      </if>
-      <if test="sort != null">
-        sort = #{sort,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.whc.mix_api.model.CollectionVideo">
+    <insert id="insert" parameterType="com.whc.mix_api.model.CollectionVideo">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into collection_video (collection_id, video_id, sort,
+        create_time, update_time)
+        values (#{collectionId,jdbcType=INTEGER}, #{videoId,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER},
+        #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.whc.mix_api.model.CollectionVideo">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into collection_video
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="collectionId != null">
+                collection_id,
+            </if>
+            <if test="videoId != null">
+                video_id,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="collectionId != null">
+                #{collectionId,jdbcType=INTEGER},
+            </if>
+            <if test="videoId != null">
+                #{videoId,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.whc.mix_api.model.CollectionVideo">
+        update collection_video
+        <set>
+            <if test="collectionId != null">
+                collection_id = #{collectionId,jdbcType=INTEGER},
+            </if>
+            <if test="videoId != null">
+                video_id = #{videoId,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.whc.mix_api.model.CollectionVideo">
     update collection_video
     set collection_id = #{collectionId,jdbcType=INTEGER},
       video_id = #{videoId,jdbcType=INTEGER},
@@ -103,13 +103,13 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="selectCollectionVideoVOList" resultMap="com.whc.mix_api.mapper.VideoMapper.VideoVO">
+    <select id="selectCollectionVideoVOList" resultMap="com.whc.mix_api.mapper.VideoMapper.VideoVO">
     select b.id, b.name, b.introduction, b.rating_num,b.cover_url, b.watch_num, b.favorite_num , 1 as director,
         2 as writer,
         3 as star from collection_video a join video b on a.video_id = b.id where a.collection_id =#{collectionId} order by a.sort,a.update_time desc
   </select>
 
-  <select id="selectCollectionVideoVOList2" resultMap="com.whc.mix_api.mapper.VideoMapper.VideoVO2">
+    <select id="selectCollectionVideoVOList2" resultMap="com.whc.mix_api.mapper.VideoMapper.VideoVO2">
     select b.id, b.name, b.introduction,b.cover_url from collection_video a join video b on a.video_id = b.id where a.collection_id =#{collectionId} order by a.sort,a.update_time desc
   </select>
 

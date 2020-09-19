@@ -1,6 +1,7 @@
 package com.whc.mix_api.model;
 
 import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.Date;
 

@@ -4,7 +4,6 @@ import com.whc.mix_api.api.ApiResult;
 import com.whc.mix_api.api.ApiResultBuilder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.function.ServerResponse;
 
 /**
  * @author whc
@@ -15,7 +14,7 @@ import org.springframework.web.servlet.function.ServerResponse;
 @RequestMapping("/video")
 public class VideoController {
 
-    ApiResult getVideoById(Integer id){
+    ApiResult getVideoById(Integer id) {
         return ApiResultBuilder.success();
     }
 

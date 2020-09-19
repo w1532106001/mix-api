@@ -3,6 +3,7 @@ package com.whc.mix_api.mapper;
 import com.whc.mix_api.model.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
 @Mapper
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);

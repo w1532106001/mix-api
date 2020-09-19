@@ -4,6 +4,7 @@ package com.whc.mix_api.auth;
  * @author whc
  * @date 2020/5/31 1:26
  */
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
@@ -30,7 +31,6 @@ public class LoginAuthenticationSecurityConfig extends SecurityConfigurerAdapter
     private UserDetailsService myUserDetailsServiceImpl;
     @Resource
     private LoginAuthenticationProvider loginAuthenticationProvider;
-
 
 
     @Override

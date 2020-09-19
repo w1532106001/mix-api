@@ -57,19 +57,20 @@ public class LoginAuthenticationFilter extends AbstractAuthenticationProcessingF
         }
 
         String loginType = request.getParameter(LOGIN_TYPE);
-        if(StringUtils.isBlank(loginType)){
+        if (StringUtils.isBlank(loginType)) {
             throw new AuthenticationServiceException(
                     "参数异常");
         }
         String loginName = request.getParameter(LOGIN_NAME);
-        switch (Integer.parseInt(loginType)){
+        switch (Integer.parseInt(loginType)) {
             case 1:
                 loginName = request.getParameter(LOGIN_NAME);
                 break;
             case 2:
                 loginName = request.getParameter(LOGIN_NAME);
                 break;
-            default:break;
+            default:
+                break;
         }
 
         loginName = loginName.trim();

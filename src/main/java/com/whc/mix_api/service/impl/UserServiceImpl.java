@@ -37,11 +37,11 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public void getLoginCaptcha(String loginName,HttpServletRequest request, HttpServletResponse response){
+    public void getLoginCaptcha(String loginName, HttpServletRequest request, HttpServletResponse response) {
         ImageCode validateCode = (ImageCode) validateCodeGenerator.generate(request);
         try {
             ImageIO.write(validateCode.getImage(), "JPEG", response.getOutputStream());
-            redisUtil.getJedis().hset("LoginImageCode", loginName,validateCode.getCode());
+            redisUtil.getJedis().hset("LoginImageCode", loginName, validateCode.getCode());
         } catch (IOException e) {
             log.error("登录验证码生成失败");
         }
@@ -49,8 +49,8 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public void send(String mobile, String code) {
-        Map<String,String> map = new HashMap(20);
-        map.put(mobile,"1234");
+        Map<String, String> map = new HashMap(20);
+        map.put(mobile, "1234");
         redisUtil.getJedis().set("SMSLoginCode", String.valueOf(map));
     }
 
@@ -59,6 +59,7 @@ public class UserServiceImpl implements IUserService {
      * 获取用户真实IP地址，不使用request.getRemoteAddr();的原因是有可能用户使用了代理软件方式避免真实IP地址。
      * 可是，如果通过了多级反向代理的话，X-Forwarded-For的值并不止一个，而是一串IP值，究竟哪个才是真正的用户端的真实IP呢？
      * 答案是取X-Forwarded-For中第一个非unknown的有效IP字符串
+     *
      * @param request
      * @return
      */
@@ -78,15 +79,15 @@ public class UserServiceImpl implements IUserService {
         }
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getRemoteAddr();
-            if("127.0.0.1".equals(ip)||"0:0:0:0:0:0:0:1".equals(ip)){
+            if ("127.0.0.1".equals(ip) || "0:0:0:0:0:0:0:1".equals(ip)) {
                 //根据网卡取本机配置的IP
-                InetAddress inet=null;
+                InetAddress inet = null;
                 try {
                     inet = InetAddress.getLocalHost();
                 } catch (UnknownHostException e) {
                     e.printStackTrace();
                 }
-                ip= inet != null ? inet.getHostAddress() : null;
+                ip = inet != null ? inet.getHostAddress() : null;
             }
         }
         return ip;

@@ -21,10 +21,11 @@ public interface CastMemberMapper {
 
     /**
      * 人员列表
+     *
      * @param videoId 视频id
      * @return
      */
-    List<CastMemberVO> selectCastMemberVOList(@Param("videoId") int videoId,@Param("type") int type);
+    List<CastMemberVO> selectCastMemberVOList(@Param("videoId") int videoId, @Param("type") int type);
 
-    List<CastMember> selectCastMemberList(@Param("personId")int personId);
+    List<CastMember> selectCastMemberList(@Param("personId") int personId);
 }

@@ -39,18 +39,19 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         log.info("登录成功");
         String loginType = request.getParameter("loginType");
         User user = null;
-        switch (loginType){
+        switch (loginType) {
             case "1":
                 user = userMapper.selectByUserName(request.getParameter("loginName"));
                 break;
             case "2":
                 user = userMapper.selectByMobile(request.getParameter("loginName"));
                 break;
-            default:break;
+            default:
+                break;
         }
-        String token = TokenUtil.TOKEN_PREFIX+UUID.randomUUID().toString();
-        redisUtil.getJedis().hset("LoginToken",token, JSONObject.toJSONString(user));
-        response.setHeader(TokenUtil.TOKEN_HEADER,token);
+        String token = TokenUtil.TOKEN_PREFIX + UUID.randomUUID().toString();
+        redisUtil.getJedis().hset("LoginToken", token, JSONObject.toJSONString(user));
+        response.setHeader(TokenUtil.TOKEN_HEADER, token);
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(objectMapper.writeValueAsString(authentication));
     }

@@ -15,21 +15,27 @@ public class LRUCache2 {
         int value;
         DLinkedNode prev;
         DLinkedNode next;
-        public DLinkedNode() {}
-        public DLinkedNode(int _key, int _value) {key = _key; value = _value;}
+
+        public DLinkedNode() {
+        }
+
+        public DLinkedNode(int _key, int _value) {
+            key = _key;
+            value = _value;
+        }
     }
 
     public static void main(String[] args) {
         int num = 3000;
-        LRUCache cache = new LRUCache( num /* 缓存容量 */ );
+        LRUCache cache = new LRUCache(num /* 缓存容量 */);
         System.out.println("put开始");
         for (int i = 0; i < num; i++) {
-            cache.put(i,i);
+            cache.put(i, i);
         }
         System.out.println("put结束");
         long startTime = System.currentTimeMillis();
         System.out.println(cache.get(2580));
-        System.out.println(System.currentTimeMillis()-startTime);
+        System.out.println(System.currentTimeMillis() - startTime);
     }
 
     private Map<Integer, DLinkedNode> cache = new HashMap<Integer, DLinkedNode>();
@@ -74,8 +80,7 @@ public class LRUCache2 {
                 cache.remove(tail.key);
                 --size;
             }
-        }
-        else {
+        } else {
             // 如果 key 存在，先通过哈希表定位，再修改 value，并移到头部
             node.value = value;
             moveToHead(node);

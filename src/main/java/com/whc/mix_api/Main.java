@@ -1,7 +1,5 @@
 package com.whc.mix_api;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.springframework.util.Assert;
 
 import java.io.IOException;
@@ -15,7 +13,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
         Integer i = 1;
-        Assert.notNull(i,"数据为空");
+        Assert.notNull(i, "数据为空");
         System.out.println(123);
     }
 }

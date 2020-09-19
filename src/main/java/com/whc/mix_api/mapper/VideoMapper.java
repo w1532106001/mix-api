@@ -1,6 +1,5 @@
 package com.whc.mix_api.mapper;
 
-import com.whc.mix_api.dto.VideoPageDTO;
 import com.whc.mix_api.model.Video;
 import com.whc.mix_api.model.vo.VideoVO;
 import org.apache.ibatis.annotations.Param;
@@ -22,7 +21,7 @@ public interface VideoMapper {
 
     VideoVO selectVideoVO(Integer id);
 
-    List<Video> selectVideoListByVideoPageDTO(@Param("tagList")List<String> tagList,@Param("searchWord")String searchWord);
+    List<Video> selectVideoListByVideoPageDTO(@Param("tagList") List<String> tagList, @Param("searchWord") String searchWord);
 
-    List<Video> selectVideoListByVideoIds(@Param("ids")List<Integer> ids);
+    List<Video> selectVideoListByVideoIds(@Param("ids") List<Integer> ids);
 }

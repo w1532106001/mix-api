@@ -46,7 +46,7 @@ public class ZeroEvenOdd {
                         if (i == n) {
                             object.notifyAll();
                             Thread.currentThread().interrupt();
-                        }else{
+                        } else {
                             try {
                                 object.notifyAll();
                                 object.wait();
@@ -74,7 +74,7 @@ public class ZeroEvenOdd {
                         if (i == n) {
                             object.notifyAll();
                             Thread.currentThread().interrupt();
-                        }else {
+                        } else {
                             try {
                                 object.notifyAll();
                                 object.wait();

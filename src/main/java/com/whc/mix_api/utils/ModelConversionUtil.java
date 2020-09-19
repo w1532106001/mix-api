@@ -1,8 +1,5 @@
 package com.whc.mix_api.utils;
 
-import com.whc.mix_api.model.vo.CollectionVO;
-
-
 /**
  * @author whc
  * @date 2020/7/27

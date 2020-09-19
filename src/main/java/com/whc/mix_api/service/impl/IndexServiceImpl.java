@@ -55,9 +55,9 @@ public class IndexServiceImpl implements IndexService {
     }
 
     @Override
-    public ApiResult getVideoList(VideoPageDTO videoPageDTO){
+    public ApiResult getVideoList(VideoPageDTO videoPageDTO) {
         PageHelper.startPage(videoPageDTO.getPageNum(), videoPageDTO.getPageSize());
-        List<Video> videoList = videoMapper.selectVideoListByVideoPageDTO(videoPageDTO.getTagList(),videoPageDTO.getSearchWord());
+        List<Video> videoList = videoMapper.selectVideoListByVideoPageDTO(videoPageDTO.getTagList(), videoPageDTO.getSearchWord());
         PageInfo<Video> page = new PageInfo<>(videoList);
         return ApiResultBuilder.success(page);
     }
@@ -67,8 +67,8 @@ public class IndexServiceImpl implements IndexService {
         VideoDetailPageVO videoDetailPageVO = new VideoDetailPageVO();
         VideoVO videoVO = videoMapper.selectVideoVO(videoId);
         videoDetailPageVO.setVideo(videoVO);
-        List<CollectionVO> collectionList = collectionMapper.selectCollectionListByVideoId(videoId,0);
-        List<CollectionVO> seriesList = collectionMapper.selectCollectionListByVideoId(videoId,1);
+        List<CollectionVO> collectionList = collectionMapper.selectCollectionListByVideoId(videoId, 0);
+        List<CollectionVO> seriesList = collectionMapper.selectCollectionListByVideoId(videoId, 1);
         videoDetailPageVO.setCollectionList(collectionList);
         videoDetailPageVO.setSeriesList(seriesList);
         return ApiResultBuilder.success(videoDetailPageVO);

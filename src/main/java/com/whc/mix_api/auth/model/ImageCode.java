@@ -1,9 +1,10 @@
 package com.whc.mix_api.auth.model;
-import java.awt.image.BufferedImage;
-import java.time.LocalDateTime;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.awt.image.BufferedImage;
+import java.time.LocalDateTime;
 
 /**
  * @author whc
@@ -11,7 +12,7 @@ import lombok.EqualsAndHashCode;
  */
 
 @Data
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 public class ImageCode extends ValidateCode {
 
     private BufferedImage image;

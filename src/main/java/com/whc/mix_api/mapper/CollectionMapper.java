@@ -21,5 +21,5 @@ public interface CollectionMapper {
 
     List<CollectionVO> selectLastUpdateTimeTenData(Integer type);
 
-    List<CollectionVO> selectCollectionListByVideoId(@Param("videoId")Integer videoId,@Param("type") Integer type);
+    List<CollectionVO> selectCollectionListByVideoId(@Param("videoId") Integer videoId, @Param("type") Integer type);
 }

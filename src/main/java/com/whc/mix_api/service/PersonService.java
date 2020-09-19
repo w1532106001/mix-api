@@ -1,7 +1,6 @@
 package com.whc.mix_api.service;
 
 import com.whc.mix_api.api.ApiResult;
-import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * @author whc

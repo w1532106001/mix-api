@@ -20,6 +20,7 @@ public class ImageCodeGenerator implements ValidateCodeGenerator {
 
     /**
      * 生成图形验证码
+     *
      * @param request
      * @return
      */

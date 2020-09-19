@@ -1,7 +1,9 @@
 package com.whc.mix_api.auth.model;
-import java.time.LocalDateTime;
 
 import lombok.Data;
+
+import java.time.LocalDateTime;
+
 /**
  * @author whc
  * @date 2020/5/31 0:18
@@ -15,7 +17,7 @@ public class ValidateCode {
 
     private LocalDateTime expireTime;
 
-    public ValidateCode(String code, int expireIn){
+    public ValidateCode(String code, int expireIn) {
         this.code = code;
         this.expireTime = LocalDateTime.now().plusSeconds(expireIn);
     }
