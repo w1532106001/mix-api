@@ -5,8 +5,10 @@ import com.whc.mix_api.api.ApiResultBuilder;
 import com.whc.mix_api.api.ApiResultCode;
 import com.whc.mix_api.mapper.CastMemberMapper;
 import com.whc.mix_api.mapper.PersonMapper;
+import com.whc.mix_api.mapper.VideoMapper;
 import com.whc.mix_api.model.CastMember;
 import com.whc.mix_api.model.Person;
+import com.whc.mix_api.model.Video;
 import com.whc.mix_api.model.vo.PersonVO;
 import com.whc.mix_api.model.vo.VideoSimpleVO;
 import com.whc.mix_api.service.PersonService;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author whc
@@ -28,6 +31,8 @@ public class PersonServiceImpl implements PersonService {
     private PersonMapper personMapper;
     @Resource
     private CastMemberMapper castMemberMapper;
+    @Resource
+    private VideoMapper videoMapper;
 
     @Override
     public ApiResult getPerson(Integer id) {
@@ -37,8 +42,13 @@ public class PersonServiceImpl implements PersonService {
             PersonVO personVO = person.toPersonVO();
             List<CastMember> castMemberList = castMemberMapper.selectCastMemberList(person.getId());
             List<VideoSimpleVO> videoSimpleVOList = new ArrayList<>();
-            castMemberList.stream().distinct()
+            List<Integer> videoIdList = castMemberList.parallelStream().map(CastMember::getVideoId).distinct().collect(Collectors.toList());
+            List<Video> videoList = videoMapper.selectVideoListByVideoIds(videoIdList);
+            for (Video video : videoList) {
+                videoSimpleVOList.add(video.toVideoSimpleVO());
+            }
             personVO.setVideoList(videoSimpleVOList);
+            return ApiResultBuilder.success(personVO);
         }
 
         return apiResult;

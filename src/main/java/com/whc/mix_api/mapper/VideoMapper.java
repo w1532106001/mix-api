@@ -23,4 +23,6 @@ public interface VideoMapper {
     VideoVO selectVideoVO(Integer id);
 
     List<Video> selectVideoListByVideoPageDTO(@Param("tagList")List<String> tagList,@Param("searchWord")String searchWord);
+
+    List<Video> selectVideoListByVideoIds(@Param("ids")List<Integer> ids);
 }

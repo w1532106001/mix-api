@@ -1,5 +1,6 @@
 package com.whc.mix_api.model;
 
+import com.whc.mix_api.model.vo.VideoSimpleVO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -35,4 +36,15 @@ public class Video implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+
+    public VideoSimpleVO toVideoSimpleVO(){
+        VideoSimpleVO videoSimpleVO = new VideoSimpleVO();
+        videoSimpleVO.setId(id);
+        videoSimpleVO.setCoverUrl(coverUrl);
+        videoSimpleVO.setFavoriteNum(favoriteNum);
+        videoSimpleVO.setName(name);
+        videoSimpleVO.setRatingNum(ratingNum);
+        videoSimpleVO.setWatchNum(watchNum);
+        return videoSimpleVO;
+    }
 }
